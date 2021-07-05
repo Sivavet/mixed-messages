@@ -1,4 +1,5 @@
-# Codecademy project
+# Codecademy project 
+[![wakatime](https://wakatime.com/badge/github/Sivavet/mixed-messages.svg)](https://wakatime.com/badge/github/Sivavet/mixed-messages)
 
 + Generate random message input the message
 + Output have some different pieces of data
