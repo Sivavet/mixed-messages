@@ -7,10 +7,10 @@
 */
 
 const creatorIncubator = (creatureName) =>{
-    let hp = Math.round(Math.random()*creatureName[1])
-    let atk = Math.round(Math.random()*creatureName[1])
-    let def = Math.round(Math.random()*creatureName[1])
-    let spd = Math.round(Math.random()*creatureName[1])
+    let hp = Math.round((Math.random()*creatureName[1])+1)
+    let atk = Math.round((Math.random()*creatureName[1])+1)
+    let def = Math.round((Math.random()*creatureName[1])+1)
+    let spd = Math.round((Math.random()*creatureName[1])+1)
 
     return{
         creatureName: creatureName[0],
@@ -20,7 +20,11 @@ const creatorIncubator = (creatureName) =>{
         spd: spd,
 
         attacked (target){
-            return this.hp -= target.atk - this.def
+            if(target.atk > this.def){
+                return this.hp -= target.atk - this.def
+            }else{
+                return console.log(`${target.creatureName} can't do any damaged`)
+            }
         },
         get status (){
             console.log(`\nChallenger name: ${this.creatureName}`)
@@ -53,18 +57,25 @@ const battle = (firstTarget, secondTarget) => {
 }
 let playersList = [['Paladin', 6], ['Assassin', 8], ['Mage', 7]]
 let monstersList = [['Slime', 3], ['Wolf', 4], ['Golem', 7], ['Vampire', 6], ['Goblin', 4], ['Orc', 7]];
-let turn = 3;
+let turn = 100;
 playerGenerator = Math.floor(Math.random()*playersList.length)
 monsterGenerator = Math.floor(Math.random()*monstersList.length)
 player = creatorIncubator(playersList[playerGenerator]);
 monster = creatorIncubator(monstersList[monsterGenerator]);
-
-for(let i=0; i<turn; i++){
-    battle(player, monster)
-}
-
 player.status;
 monster.status;
+
+for(let i=0; i<turn; i++){
+    if((player.atk <= monster.def) && (monster.atk <= player.def)){
+        break;
+    }else if((player.hp > 0) && (monster.hp > 0)) {
+        battle(player, monster)
+    }else{
+        break;
+    }
+}
+
+
 
 if((player.hp <= 0) || (monster.hp > player.hp)){
     console.log('\nYou lose')
