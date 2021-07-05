@@ -73,3 +73,4 @@ if((player.hp <= 0) || (monster.hp > player.hp)){
 }else{
     console.log('\nDraw')
 }
+
